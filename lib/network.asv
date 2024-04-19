@@ -179,15 +179,13 @@ classdef network
                     end
                 end
                 
-                len = length(network.tx_packet);
-                if(len > 1)
+                if(length(network.tx_packet) > 1)
                     network.tx_packet = network.tx_packet(2:end);
                 else
                     network.tx_packet = [];
                 end
             end
 
-            obj = network;
         end
     end
 end

@@ -8,23 +8,31 @@ classdef packet
         pkt_id;
         rx_time;
         dest;
+        data;
     end
     
     methods
+
         function obj = packet()
-            obj.tx_time = [];
-            obj.src = [];
-            obj.rx_time = [];
-            obj.dest = [];
+
         end
 
-        function obj = txPacket(obj, src, tx_time, pkt_id, dest)
+        function obj = genDiscPacket(packet, src, tx_time, pkt_id, data)
             obj.tx_time = tx_time;
             obj.src = src;
             obj.pkt_id = pkt_id;
             obj.rx_time = [];
-            obj.dest = dest;
+            obj.dest = 255;
+            obj.data = data;
+        end
 
+        function obj = genDataPacket(packet, src, tx_time, pkt_id, dest, data)
+            obj.tx_time = tx_time;
+            obj.src = src;
+            obj.pkt_id = pkt_id;
+            obj.rx_time = [];
+            obj.dest = 255;
+            obj.data = data;
         end
     end
 

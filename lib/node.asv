@@ -170,14 +170,12 @@ classdef node
                     elseif floor(tmp_remote_seq(k)*10) == floor(tmp_table_seq(val)*10)
                         
                         tmp_table_dist = tmp_table.distance;
-                        tmp_remote_dist = struct2table(remoteTable);
-                        tmp_remote_dist = tmp_remote_dist.distance;
 
-                        if(tmp_table_dist(val) > tmp_remote_dist(k)+1)
-                            route_table(val,1).dest = remoteTable(k,1).dest;
+                        if(tmp_table_dist(val) > remoteTable.distance(k)+1)
+                            route_table(val,1).dest = remoteTable.dest(k);
                             route_table(val,1).next_hop = src_node;
-                            route_table(val,1).seq = remoteTable(k,1).seq;
-                            route_table(val,1).distance = remoteTable(k,1).hop + 1;
+                            route_table(val,1).seq = remoteTable.seq;
+                            route_table(val,1).distance = remoteTable.hop + 1;
                         end
                     end                    
                 end
@@ -187,9 +185,7 @@ classdef node
             route_table = struct2table(route_table);
             route_table = sortrows(route_table, 'distance');
             route_table = table2struct(route_table);
-            
-            node.routing_table = route_table;
-            obj = node;
+
         end
     end
 end
