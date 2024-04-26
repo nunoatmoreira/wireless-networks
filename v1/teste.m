@@ -173,10 +173,15 @@ st = struct2table(st);
 
 %% TEST TX
 NODE = node(1,2,3);
+NODE_2 = node(2,3,4);
+
+NODE = [NODE; NODE_2];
+
 NETWORK = network(NODE);
 
 NETWORK = NETWORK.generateTxPackets(1,[1]);
 NETWORK = NETWORK.generateTxPackets(1.2,[2]);
+NETWORK = NETWORK.generateTxPackets(0.1,[3]);
 NETWORK = NETWORK.generateTxPackets(0.1,[3]);
 
 
