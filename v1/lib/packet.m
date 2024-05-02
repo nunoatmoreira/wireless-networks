@@ -4,7 +4,7 @@ classdef packet
     
     properties
         timestamp;
-        header = struct('src', [], 'dest', [], 'pkt_id', []);
+        header = struct('src', [], 'dest', [], 'pkt_id', [], 'pkt_type', []);
         data;
     end
     
@@ -17,6 +17,7 @@ classdef packet
             obj.header.src = [];
             obj.header.dest = [];
             obj.header.pkt_id = [];
+            obj.header.pkt_type = [];
 
             obj.data = [];
         end
@@ -26,16 +27,16 @@ classdef packet
             obj = packet();
 
             obj.timestamp = struct_packet.timestamp;
-
         end
 
         %% CREATE PACKET
-        function obj = createPacket(~, tx_time, source, destination, pkt_id, data)
+        function obj = createPacket(~, tx_time, source, destination, pkt_id, pkt_type, data)
             obj = packet();
             obj.timestamp = tx_time;
             obj.header.src = source;
             obj.header.dest = destination;
             obj.header.pkt_id = pkt_id;
+            obj.header.pkt_type = pkt_type;
             obj.data = data;
         end
 
@@ -64,6 +65,11 @@ classdef packet
         % Get Packet ID
         function pkt_id = getPacketId(packet)
             pkt_id = packet.header.pkt_id;
+        end
+
+        % Get Packet Type
+        function pkt_type = getPacektType(packet)
+            pkt_type = packet.header.pkt_type;
         end
 
         %% DATA

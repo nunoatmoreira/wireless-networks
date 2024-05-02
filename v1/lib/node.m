@@ -88,6 +88,7 @@ classdef node
 
     %% TRAFFIC METHODS
     methods
+        % Tx
         function updated_node = addTxPacket(node, tx_packet)
             
             % Get list of Transmitted Packets
@@ -103,6 +104,23 @@ classdef node
             updated_node = node;
             updated_node.tx_packet = tx_list;
 
+        end
+        
+        % Rx
+        function updated_node = addRxPacket(node, rx_packet)
+            
+            % Get list of Receivec Packets
+            rx_list = node.rx_packet;
+
+            % Add packet to the list
+            rx_list = [rx_list; rx_packet];
+
+            % Sort list
+            rx_list = node.sortPacketList(rx_list);
+
+            % Return node object
+            updated_node = node;
+            updated_node.rx_packet = rx_list;
         end
     end
 
